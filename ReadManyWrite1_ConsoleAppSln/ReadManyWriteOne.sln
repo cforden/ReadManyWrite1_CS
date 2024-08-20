@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadManyWriteOne", "ReadManyWrite1_ConsoleAppCSProj\ReadManyWriteOne.csproj", "{CDCB2B7F-E8D3-4A1A-B0F5-133BBFDD553A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDCB2B7F-E8D3-4A1A-B0F5-133BBFDD553A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCB2B7F-E8D3-4A1A-B0F5-133BBFDD553A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDCB2B7F-E8D3-4A1A-B0F5-133BBFDD553A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDCB2B7F-E8D3-4A1A-B0F5-133BBFDD553A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14FA0B7C-33DC-4A5C-9CF7-874833A7169D}
+	EndGlobalSection
+EndGlobal
