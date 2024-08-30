@@ -9,8 +9,8 @@ namespace ReadManyWriteOne
     /// </summary>
     class Program
     {
-        private const int ITERATIONS = 100_000;
-        private const int LOG_ITERATIONS = 10_000;
+        private const int ITERATIONS = 1000_000;
+        private const int LOG_ITERATIONS = 100_000;
 
         private static StringReverserThdSafe rw = new();
 
@@ -42,6 +42,8 @@ namespace ReadManyWriteOne
         {
             Console.WriteLine("Starting threads...");
 
+            System.DateTime startTime = System.DateTime.Now;
+
             // Create and start threads
             Task taskR1 = Task.Run(() => ReadWork("R1"));
             Task taskR2 = Task.Run(() => ReadWork("R2"));
@@ -58,7 +60,8 @@ namespace ReadManyWriteOne
             taskW1.Wait();
             taskW2.Wait();
 
-            Console.WriteLine($"All threads completed.  Multithreading error count: {rw.ErrorCount}");
+            TimeSpan timeSpan = System.DateTime.Now - startTime;
+            Console.WriteLine($"All threads completed in (hrs:mins:secs:) {timeSpan}).\nMultithreading error count: {rw.ErrorCount}");
         }
     }
 }
