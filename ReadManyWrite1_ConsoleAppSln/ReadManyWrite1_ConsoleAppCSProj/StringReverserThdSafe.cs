@@ -13,7 +13,7 @@ namespace ReadManyWriteOne
     internal class StringReverserThdSafe
     {
         private StringReverser unprotectedReverser = new StringReverser();
-        private int readerCount = 0; // How many threads are still trying to read the data?
+        private ReaderWriterLockSlim rwLock = new();
 
         public int ErrorCount
         {
@@ -34,31 +34,29 @@ namespace ReadManyWriteOne
 
         public void Write()
         {
-            bool reading = true;
-            while (reading)
+            try
             {
-                lock (unprotectedReverser)
-                {
-                    if (readerCount == 0)
-                    {
-                        reading = false;
-                        unprotectedReverser.Write();
-                    }
-                }
+                rwLock.EnterWriteLock();
+                unprotectedReverser.Write();
+            }
+            finally
+            {
+                rwLock.ExitWriteLock();
             }
         }
 
         public bool ReadTest()
         {
-            lock (unprotectedReverser)
+            bool dataReadWasValid = false;
+            try
             {
-                readerCount++;
+                rwLock.EnterReadLock();
                 DbgReaderCountStates();
+                dataReadWasValid = unprotectedReverser.ReadTest();
             }
-            bool dataReadWasValid = unprotectedReverser.ReadTest();
-            lock (unprotectedReverser)
+            finally
             {
-                readerCount--;
+                rwLock.ExitReadLock();
             }
             return dataReadWasValid;
         }
@@ -71,7 +69,7 @@ namespace ReadManyWriteOne
         private void DbgReaderCountStates()
         {
             DbgInitReaderCounts();
-            dbgCountStates[readerCount]++;
+            dbgCountStates[rwLock.CurrentReadCount]++;
         }
 
         /// <summary>
