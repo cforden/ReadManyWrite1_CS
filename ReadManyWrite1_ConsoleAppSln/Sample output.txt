@@ -1,61 +1,115 @@
 Starting threads...
-Thread Write2: Iteration 100000
-Thread Write1: Iteration 100000
-Thread R3: Iteration 100000
 Thread R1: Iteration 100000
 Thread R2: Iteration 100000
+Thread R3: Iteration 100000
+Thread Write1: Iteration 100000
+Thread Write2: Iteration 100000
 Thread Write1: Iteration 200000
+Thread R1: Iteration 200000
+Thread R2: Iteration 200000
 Thread Write2: Iteration 200000
 Thread R3: Iteration 200000
-Thread R2: Iteration 200000
-Thread R1: Iteration 200000
-Thread Write2: Iteration 300000
 Thread Write1: Iteration 300000
-Thread R3: Iteration 300000
 Thread R1: Iteration 300000
+Thread Write2: Iteration 300000
 Thread R2: Iteration 300000
 Thread Write1: Iteration 400000
-Thread Write2: Iteration 400000
-Thread R3: Iteration 400000
-Thread Write1: Iteration 500000
-Thread R2: Iteration 400000
-Thread Write2: Iteration 500000
 Thread R1: Iteration 400000
-Thread R3: Iteration 500000
-Thread Write2: Iteration 600000
+Thread Write2: Iteration 400000
+Thread R3: Iteration 300000
+Thread R2: Iteration 400000
+Thread Write1: Iteration 500000
+Thread R1: Iteration 500000
+Thread Write2: Iteration 500000
 Thread Write1: Iteration 600000
 Thread R2: Iteration 500000
-Thread R1: Iteration 500000
-Thread Write1: Iteration 700000
-Thread R3: Iteration 600000
-Thread Write2: Iteration 700000
-Thread R2: Iteration 600000
-Thread Write2: Iteration 800000
-Thread Write1: Iteration 800000
-Thread R3: Iteration 700000
+Thread R3: Iteration 400000
 Thread R1: Iteration 600000
-Thread Write1: Iteration 900000
-Thread Write2: Iteration 900000
-Thread R2: Iteration 700000
-Thread R3: Iteration 800000
-Thread Write1: Iteration 1000000
+Thread Write1: Iteration 700000
+Thread Write2: Iteration 600000
+Thread R2: Iteration 600000
+Thread Write1: Iteration 800000
 Thread R1: Iteration 700000
-Thread Write2: Iteration 1000000
-Thread R2: Iteration 800000
-Thread R3: Iteration 900000
+Thread Write2: Iteration 700000
+Thread R3: Iteration 500000
+Thread R2: Iteration 700000
+Thread Write1: Iteration 900000
 Thread R1: Iteration 800000
-Thread R3: Iteration 1000000
-Thread R2: Iteration 900000
+Thread Write2: Iteration 800000
+Thread Write1: Iteration 1000000
+Thread Write2: Iteration 900000
+Thread R2: Iteration 800000
+Thread R3: Iteration 600000
 Thread R1: Iteration 900000
-Thread R2: Iteration 1000000
+Thread Write2: Iteration 1000000
+Thread R2: Iteration 900000
 Thread R1: Iteration 1000000
-All threads completed in (hrs:mins:secs:) 00:00:01.7482982).
+Thread R3: Iteration 700000
+Thread R2: Iteration 1000000
+Thread R3: Iteration 800000
+Thread R3: Iteration 900000
+Thread R3: Iteration 1000000
+All threads completed in (hrs:mins:secs:) 00:00:05.3029364).
 Multithreading error count: 0
 
 Number of Readers     Times encountered
                 0                     0
-                1               692,322
-                2             1,387,490
-                3               920,188
+                1               802,938
+                2             1,370,917
+                3               826,145
                 4                     0
+
+Max number of times Write() had to try to acquire lock: 86921
+
+# lock attempts.  Occurances of that #
+              1             2,000,000
+              2                20,517
+              3                18,972
+              4                18,758
+              5                18,664
+              6                18,611
+              7                18,511
+              8                18,431
+              9                18,339
+             10                18,226
+             11                18,145
+             12                18,063
+             13                17,981
+             14                17,902
+             15                17,849
+             16                17,794
+             17                17,726
+             18                17,655
+             19                17,570
+             20                17,487
+             21                17,392
+             22                17,315
+             23                17,230
+             24                17,160
+             25                17,104
+             26                17,063
+             27                17,005
+             28                16,953
+             29                16,885
+             30                16,834
+             31                16,783
+             32                16,718
+             33                16,669
+             34                16,597
+             35                16,547
+             36                16,480
+             37                16,407
+             38                16,343
+             39                16,285
+             40                16,235
+             41                16,181
+             42                16,120
+             43                16,064
+             44                16,006
+             45                15,930
+             46                15,880
+             47                15,827
+             48                15,771
+             49                15,715
+             50                15,653
 

@@ -34,11 +34,14 @@ namespace ReadManyWriteOne
 
         public void Write()
         {
+            int dbgLocalCountWriteAttempts = 0;
             bool reading = true;
             while (reading)
             {
+                ++dbgLocalCountWriteAttempts;
                 lock (unprotectedReverser)
                 {
+                    DbgWriteAttempts(dbgLocalCountWriteAttempts);
                     if (readerCount == 0)
                     {
                         reading = false;
@@ -63,15 +66,23 @@ namespace ReadManyWriteOne
             return dataReadWasValid;
         }
 
+        #region Read Stats
+
         long[] dbgCountStates;
+        object readerStatsLock = new object();
 
         /// <summary>
         /// Counts the number of times this many (readerCount) threads were simultaneously trying to read
         /// </summary>
         private void DbgReaderCountStates()
         {
-            DbgInitReaderCounts();
-            dbgCountStates[readerCount]++;
+#       if DEBUG
+            lock (readerStatsLock)
+            {
+                DbgInitReaderCounts();
+                dbgCountStates[readerCount]++;
+            }
+#       endif
         }
 
         /// <summary>
@@ -85,8 +96,12 @@ namespace ReadManyWriteOne
             }
         }
 
-        public void PrintReaderCountStates()
+        /// <summary>
+        /// Prints stats about the number of threads simultaneously trying to read
+        /// </summary>
+        public void DbgPrintReaderCountStates()
         {
+#       if DEBUG
             DbgInitReaderCounts();
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat($"Number of Readers     Times encountered");
@@ -94,10 +109,65 @@ namespace ReadManyWriteOne
             {
                 sb.AppendFormat($"\n{countIdx,17:N0}{dbgCountStates[countIdx],22:N0}");
             }
-            sb.AppendFormat($"\n");
-
             Console.WriteLine($"\n{sb}\n");
+#       endif
         }
 
+        #endregion Read Stats
+        #region Write Stats
+
+        private SortedDictionary<int, long> dbgWriteAttemptsOccurances = new();
+        private long dbgMaxWriteLockAttempts = 0;
+        private object dbgWriteStatsLock = new object();
+
+        /// <summary>
+        /// Increments the number of times this.Write() has attempted to get a lock on the unprotected data object 
+        /// (such as StringReverser) writeAttempts times.
+        /// </summary>
+        /// <param name="writeAttempts">How many times this.Write() had to attempt 
+        /// to lock the unprotected data object in order to get that lock</param>
+        private void DbgWriteAttempts(int writeAttempts)
+        {
+#       if DEBUG
+            lock (dbgWriteStatsLock)
+            {
+                if (dbgMaxWriteLockAttempts < writeAttempts)
+                {
+                    dbgMaxWriteLockAttempts = writeAttempts;
+                }
+
+                if (dbgWriteAttemptsOccurances.TryGetValue(writeAttempts, out long occurances))
+                {
+                    dbgWriteAttemptsOccurances[writeAttempts] = occurances + 1;
+                }
+                else
+                {
+                    if (dbgWriteAttemptsOccurances.Count() < 50)
+                    {
+                        dbgWriteAttemptsOccurances[writeAttempts] = 1;
+                    }
+                }
+            }
+#       endif
+        }
+
+        /// <summary>
+        /// Prints stats about how many times this.Write() had to attempt to get a lock
+        /// </summary>
+        public void DbgPrintWriteLockAttempts()
+        {
+#       if DEBUG
+            Console.WriteLine($"Max number of times Write() had to try to acquire lock: {dbgMaxWriteLockAttempts}");
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat($"# lock attempts.  Occurances of that #");
+            foreach (KeyValuePair<int, long> kvp in dbgWriteAttemptsOccurances)
+            {
+                sb.AppendFormat($"\n{kvp.Key,15:N0}{kvp.Value,22:N0}");
+            }
+            Console.WriteLine($"{sb}\n");
+#       endif
+        }
+
+        #endregion Write Stats
     }
-}
+} // namespace ReadManyWriteOne

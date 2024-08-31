@@ -64,7 +64,8 @@ namespace ReadManyWriteOne
 
             TimeSpan timeSpan = System.DateTime.Now - startTime;
             Console.WriteLine($"All threads completed in (hrs:mins:secs:) {timeSpan}).\nMultithreading error count: {rw.ErrorCount}");
-            rw.PrintReaderCountStates();
+            rw.DbgPrintReaderCountStates();
+            rw.DbgPrintWriteLockAttempts();
         }
     }
 }
