@@ -1,53 +1,61 @@
 Starting threads...
-Thread Write1: Iteration 100000
 Thread Write2: Iteration 100000
-Thread R1: Iteration 100000
+Thread Write1: Iteration 100000
 Thread R3: Iteration 100000
+Thread R1: Iteration 100000
 Thread R2: Iteration 100000
 Thread Write1: Iteration 200000
 Thread Write2: Iteration 200000
-Thread R1: Iteration 200000
 Thread R3: Iteration 200000
 Thread R2: Iteration 200000
-Thread Write1: Iteration 300000
+Thread R1: Iteration 200000
 Thread Write2: Iteration 300000
-Thread R1: Iteration 300000
+Thread Write1: Iteration 300000
 Thread R3: Iteration 300000
+Thread R1: Iteration 300000
 Thread R2: Iteration 300000
 Thread Write1: Iteration 400000
-Thread R1: Iteration 400000
-Thread R3: Iteration 400000
-Thread R2: Iteration 400000
 Thread Write2: Iteration 400000
+Thread R3: Iteration 400000
 Thread Write1: Iteration 500000
-Thread R1: Iteration 500000
-Thread R3: Iteration 500000
-Thread R2: Iteration 500000
+Thread R2: Iteration 400000
 Thread Write2: Iteration 500000
-Thread Write1: Iteration 600000
-Thread R1: Iteration 600000
-Thread R2: Iteration 600000
-Thread R3: Iteration 600000
-Thread Write1: Iteration 700000
+Thread R1: Iteration 400000
+Thread R3: Iteration 500000
 Thread Write2: Iteration 600000
-Thread R1: Iteration 700000
-Thread R3: Iteration 700000
-Thread R2: Iteration 700000
-Thread Write1: Iteration 800000
-Thread R1: Iteration 800000
+Thread Write1: Iteration 600000
+Thread R2: Iteration 500000
+Thread R1: Iteration 500000
+Thread Write1: Iteration 700000
+Thread R3: Iteration 600000
 Thread Write2: Iteration 700000
-Thread R2: Iteration 800000
-Thread R3: Iteration 800000
-Thread Write1: Iteration 900000
-Thread R1: Iteration 900000
-Thread R2: Iteration 900000
-Thread R3: Iteration 900000
-Thread Write1: Iteration 1000000
+Thread R2: Iteration 600000
 Thread Write2: Iteration 800000
-Thread R1: Iteration 1000000
-Thread R2: Iteration 1000000
-Thread R3: Iteration 1000000
+Thread Write1: Iteration 800000
+Thread R3: Iteration 700000
+Thread R1: Iteration 600000
+Thread Write1: Iteration 900000
 Thread Write2: Iteration 900000
+Thread R2: Iteration 700000
+Thread R3: Iteration 800000
+Thread Write1: Iteration 1000000
+Thread R1: Iteration 700000
 Thread Write2: Iteration 1000000
-All threads completed in (hrs:mins:secs:) 00:00:01.8598156).
+Thread R2: Iteration 800000
+Thread R3: Iteration 900000
+Thread R1: Iteration 800000
+Thread R3: Iteration 1000000
+Thread R2: Iteration 900000
+Thread R1: Iteration 900000
+Thread R2: Iteration 1000000
+Thread R1: Iteration 1000000
+All threads completed in (hrs:mins:secs:) 00:00:01.7482982).
 Multithreading error count: 0
+
+Number of Readers     Times encountered
+                0                     0
+                1               692,322
+                2             1,387,490
+                3               920,188
+                4                     0
+

@@ -14,6 +14,8 @@ namespace ReadManyWriteOne
 
         private static StringReverserThdSafe rw = new();
 
+        public static int MaxReaders { get; private set; }
+
         static private void WriteWork(string threadName)
         {
             for (int i = 1; i <= ITERATIONS; i++)
@@ -41,9 +43,9 @@ namespace ReadManyWriteOne
         static void Main(string[] args)
         {
             Console.WriteLine("Starting threads...");
-
             System.DateTime startTime = System.DateTime.Now;
 
+            MaxReaders = 3;
             // Create and start threads
             Task taskR1 = Task.Run(() => ReadWork("R1"));
             Task taskR2 = Task.Run(() => ReadWork("R2"));
@@ -62,6 +64,7 @@ namespace ReadManyWriteOne
 
             TimeSpan timeSpan = System.DateTime.Now - startTime;
             Console.WriteLine($"All threads completed in (hrs:mins:secs:) {timeSpan}).\nMultithreading error count: {rw.ErrorCount}");
+            rw.PrintReaderCountStates();
         }
     }
 }
