@@ -37,7 +37,7 @@ namespace ReadManyWriteOne
             bool reading = true;
             while (reading)
             {
-                lock (this)
+                lock (unprotectedReverser)
                 {
                     if (readerCount == 0)
                     {
@@ -50,13 +50,13 @@ namespace ReadManyWriteOne
 
         public bool ReadTest()
         {
-            lock (this)
+            lock (unprotectedReverser)
             {
                 readerCount++;
                 DbgReaderCountStates();
             }
             bool dataReadWasValid = unprotectedReverser.ReadTest();
-            lock (this)
+            lock (unprotectedReverser)
             {
                 readerCount--;
             }
