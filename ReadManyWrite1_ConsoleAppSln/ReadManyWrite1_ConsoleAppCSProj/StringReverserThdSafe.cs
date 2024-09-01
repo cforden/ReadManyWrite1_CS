@@ -16,6 +16,7 @@ namespace ReadManyWriteOne
         private StringReverser unprotectedReverser = new StringReverser();
         private int readerCount = 0; // How many threads are still trying to read the data?
         AutoResetEvent areFinishedReading = new AutoResetEvent(false);
+        ManualResetEvent allowReading = new ManualResetEvent(true);
 
         public int ErrorCount
         {
@@ -49,6 +50,7 @@ namespace ReadManyWriteOne
                     {
                         reading = false;
                         unprotectedReverser.Write();
+                        writeRequested = false;
                     }
                     else
                     {
@@ -57,13 +59,16 @@ namespace ReadManyWriteOne
                 }
                 if (writeRequested)
                 {
+                    allowReading.Reset();
                     areFinishedReading.WaitOne();
                 }
             }
+            allowReading.Set();
         }
 
         public bool ReadTest()
         {
+            allowReading.WaitOne();
             lock (unprotectedReverser)
             {
                 readerCount++;
