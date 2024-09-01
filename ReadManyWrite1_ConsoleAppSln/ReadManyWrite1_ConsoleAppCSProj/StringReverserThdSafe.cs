@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -14,6 +15,7 @@ namespace ReadManyWriteOne
     {
         private StringReverser unprotectedReverser = new StringReverser();
         private int readerCount = 0; // How many threads are still trying to read the data?
+        AutoResetEvent areFinishedReading = new AutoResetEvent(false);
 
         public int ErrorCount
         {
@@ -36,6 +38,7 @@ namespace ReadManyWriteOne
         {
             int dbgLocalCountWriteAttempts = 0;
             bool reading = true;
+            bool writeRequested = false;
             while (reading)
             {
                 ++dbgLocalCountWriteAttempts;
@@ -47,6 +50,14 @@ namespace ReadManyWriteOne
                         reading = false;
                         unprotectedReverser.Write();
                     }
+                    else
+                    {
+                        writeRequested = true;
+                    }
+                }
+                if (writeRequested)
+                {
+                    areFinishedReading.WaitOne();
                 }
             }
         }
@@ -63,13 +74,17 @@ namespace ReadManyWriteOne
             {
                 readerCount--;
             }
+            if (readerCount == 0)
+            {
+                areFinishedReading.Set();
+            }
             return dataReadWasValid;
         }
 
         #region Read Stats
 
-        long[] dbgCountStates;
-        object readerStatsLock = new object();
+        private long[] dbgCountStates = new long[10];
+        private object readerStatsLock = new();
 
         /// <summary>
         /// Counts the number of times this many (readerCount) threads were simultaneously trying to read
