@@ -7,5 +7,5 @@ Branches of interest:
 The Debug config gathers and prints (to Console) statistics on reader and writer activity.  Both Release and Debug configs print progress messages showing interleaving between reading and writing.
 
 See also similar demos I wrote in other languages:
-- C#:  https://github.com/cforden/ReadManyWrite1_py
+- Python:  https://github.com/cforden/ReadManyWrite1_py  (but Python is single-threaded)
 - C++  https://github.com/cforden/ReadManyWrite1_Cpp
